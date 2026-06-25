@@ -1,0 +1,22 @@
+import socket
+
+PORT = 5000
+
+server_ip = input("Enter Server IP: ")
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+client.connect((server_ip, PORT))
+
+print("Connected!\n")
+
+while True:
+    msg = input("You: ")
+
+    client.send(msg.encode())
+
+    data = client.recv(1024)
+
+    print("Server:", data.decode())
+
+client.close()
